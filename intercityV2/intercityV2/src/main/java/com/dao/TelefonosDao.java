@@ -17,149 +17,128 @@ import org.hibernate.Transaction;
  *
  * @author jorge
  */
-public class TelefonosDao implements ITelefonosDao  {
+public class TelefonosDao implements ITelefonosDao {
 
-     private Session sesion; 
+    private Session sesion;
     private Transaction tx;
-    
-    private void iniciaOperacion() throws HibernateException 
-    { 
-        sesion = HibernateUtil.getSessionFactory().openSession(); 
-        tx = sesion.beginTransaction(); 
-    }  
-    private void manejaExcepcion(HibernateException he) throws HibernateException 
-    { 
-        tx.rollback(); 
-        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he); 
-    } 
-    
-    
-    public List<Telefonos> getAllTelefonos() throws HibernateException 
-    { 
-        List<Telefonos> listaTelefonoss = null;  
 
-        try 
-        { 
-            iniciaOperacion(); 
-            listaTelefonoss = sesion.createQuery("from Telefonos").list(); 
-        } finally 
-        { 
-            sesion.close(); 
-        }  
+    private void iniciaOperacion() throws HibernateException {
+        sesion = HibernateUtil.getSessionFactory().openSession();
+        tx = sesion.beginTransaction();
+    }
 
-        return listaTelefonoss; 
-    } 
-    
-    public Telefonos getTelefono(String telefono) throws HibernateException 
-    { 
-        Telefonos tel = null;  
-        try 
-        { 
+    private void manejaExcepcion(HibernateException he) throws HibernateException {
+        tx.rollback();
+        throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he);
+    }
+
+    public List<Telefonos> getAllTelefonos() throws HibernateException {
+        List<Telefonos> listaTelefonoss = null;
+
+        try {
             iniciaOperacion();
-             String queryString = "from Telefonos where telefono = :telefono";
+            listaTelefonoss = sesion.createQuery("from Telefonos").list();
+        } finally {
+            sesion.close();
+        }
+
+        return listaTelefonoss;
+    }
+
+    public Telefonos getTelefono(String telefono) throws HibernateException {
+        Telefonos tel = null;
+        try {
+            iniciaOperacion();
+            String queryString = "from Telefonos where telefono_area = :telefono";
             Query query = sesion.createQuery(queryString);
             query.setString("telefono", telefono);
             tel = (Telefonos) query.uniqueResult();
-            System.out.println("El usuario exite"+tel.getTelefonoArea());
-        } 
-        catch(Exception e)
-        {
+            System.out.println("El usuario exite" + tel.getTelefonoArea());
+        } catch (Exception e) {
             e.printStackTrace();
-            
+
+        } finally {
+            sesion.close();
+
         }
-        finally 
-        { 
-            sesion.close(); 
-           
-        }  
 
-        return tel; 
+        return tel;
     }
-    
-       public Telefonos getTelefono2(String idTelefonos) throws HibernateException 
-    { 
-        Telefonos tel = null;  
-        try 
-        { 
-            iniciaOperacion(); 
-            tel = (Telefonos) sesion.get(Telefonos.class, idTelefonos); 
-        } finally 
-        { 
-            sesion.close(); 
-        }  
 
-        return tel; 
+    public Telefonos getTelefono2(String idTelefonos) throws HibernateException {
+        Telefonos tel = null;
+        try {
+            iniciaOperacion();
+            tel = (Telefonos) sesion.get(Telefonos.class, idTelefonos);
+        } finally {
+            sesion.close();
+        }
+
+        return tel;
     }
-    
-     public boolean deleteTelefonos(Telefonos tel) throws HibernateException 
-    { 
+
+    public boolean deleteTelefonos(Telefonos tel) throws HibernateException {
         boolean resultado = false;
-         try
-        { 
-            iniciaOperacion(); 
-            sesion.delete(tel); 
-            tx.commit(); 
+        try {
+            iniciaOperacion();
+            sesion.delete(tel);
+            tx.commit();
             resultado = true;
-        } catch (HibernateException he) 
-        { 
-            manejaExcepcion(he); 
-            throw he; 
-        } finally 
-        { 
-            sesion.close(); 
-        } 
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            sesion.close();
+        }
         return resultado;
-    } 
-         public boolean updateTelefono(Telefonos tel) throws HibernateException 
-    {
-        boolean resultado =false;
-       try 
-        { 
-            iniciaOperacion(); 
-            sesion.update(tel); 
-            tx.commit(); 
+    }
+
+    public boolean updateTelefono(Telefonos tel) throws HibernateException {
+        boolean resultado = false;
+        try {
+            iniciaOperacion();
+            sesion.update(tel);
+            tx.commit();
             resultado = true;
-        } catch (HibernateException he) 
-        { 
-            manejaExcepcion(he); 
-            throw he; 
-        } finally 
-        { 
-            sesion.close(); 
-        } 
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            sesion.close();
+        }
         return resultado;
-    } 
-         
-         public boolean createTelefono(Telefonos tel) throws HibernateException 
-    {
-       boolean resultado = false;  
+    }
 
-        try 
-        { 
-            iniciaOperacion(); 
-             sesion.save(tel); 
-            tx.commit(); 
+    public boolean createTelefono(Telefonos tel) throws HibernateException {
+        boolean resultado = false;
+
+        try {
+            iniciaOperacion();
+            sesion.save(tel);
+            tx.commit();
             resultado = true;
-        } catch (HibernateException he) 
-        { 
-            manejaExcepcion(he); 
-            throw he; 
-        } finally 
-        { 
-            sesion.close(); 
-        }  
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            sesion.close();
+        }
 
-        return resultado; 
-    }  
+        return resultado;
+    }
 
     public boolean deleteTelefono(String telefono) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int countTelefonos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        int cantidad = 0;
+        cantidad = this.getAllTelefonos().size()+1;
+        System.out.println("el numero de registro es "+cantidad);
+        
+        return cantidad;
+
     }
 
-    
-    
 }
