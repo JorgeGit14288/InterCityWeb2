@@ -101,7 +101,7 @@ public class UsuariosController {
             System.out.println(telefono.getTelefonoArea() + " " + telefono.getPassword());
 
             tel2 = dao.getTelefono(telefono.getTelefonoArea());
-            if (tel2.getTelefonoArea().compareTo(null) == 0) {
+            if (tel2.getTelefonoArea()==null) {
                   mensaje = "El usuario no existe en la base de datos";
                     System.out.println("ha ocurrido un error");
                     mav.setViewName("login/login");
