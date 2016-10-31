@@ -60,6 +60,7 @@ public class PerfilController {
             
         } else {
             String sesUser = sesion.getAttribute("usuario").toString();
+            String sesuser = sesUser.replace("-","");
             GetAccount accountHelper = new GetAccount();
              account = accountHelper.getAccountObject(sesUser);
              System.out.println("Regrese con datos para la vista "+account.getFirst_name()+account.getLanguaje_id());
