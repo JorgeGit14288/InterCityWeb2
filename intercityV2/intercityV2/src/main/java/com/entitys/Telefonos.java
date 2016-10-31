@@ -1,5 +1,5 @@
 package com.entitys;
-// Generated 29-oct-2016 19:35:16 by Hibernate Tools 4.3.1
+// Generated 30-oct-2016 12:42:32 by Hibernate Tools 4.3.1
 
 
 
@@ -9,10 +9,10 @@ package com.entitys;
 public class Telefonos  implements java.io.Serializable {
 
 
+     private String telefonoArea;
      private String telefono;
      private String password;
      private String codigoArea;
-     private String telefonoArea;
      private String codigoConfirm;
      private String status;
      private String idUsuario;
@@ -21,23 +21,30 @@ public class Telefonos  implements java.io.Serializable {
     }
 
 	
-    public Telefonos(String telefono, String password, String codigoArea, String telefonoArea, String idUsuario) {
+    public Telefonos(String telefonoArea, String telefono, String password, String codigoArea, String idUsuario) {
+        this.telefonoArea = telefonoArea;
         this.telefono = telefono;
         this.password = password;
         this.codigoArea = codigoArea;
-        this.telefonoArea = telefonoArea;
         this.idUsuario = idUsuario;
     }
-    public Telefonos(String telefono, String password, String codigoArea, String telefonoArea, String codigoConfirm, String status, String idUsuario) {
+    public Telefonos(String telefonoArea, String telefono, String password, String codigoArea, String codigoConfirm, String status, String idUsuario) {
+       this.telefonoArea = telefonoArea;
        this.telefono = telefono;
        this.password = password;
        this.codigoArea = codigoArea;
-       this.telefonoArea = telefonoArea;
        this.codigoConfirm = codigoConfirm;
        this.status = status;
        this.idUsuario = idUsuario;
     }
    
+    public String getTelefonoArea() {
+        return this.telefonoArea;
+    }
+    
+    public void setTelefonoArea(String telefonoArea) {
+        this.telefonoArea = telefonoArea;
+    }
     public String getTelefono() {
         return this.telefono;
     }
@@ -58,13 +65,6 @@ public class Telefonos  implements java.io.Serializable {
     
     public void setCodigoArea(String codigoArea) {
         this.codigoArea = codigoArea;
-    }
-    public String getTelefonoArea() {
-        return this.telefonoArea;
-    }
-    
-    public void setTelefonoArea(String telefonoArea) {
-        this.telefonoArea = telefonoArea;
     }
     public String getCodigoConfirm() {
         return this.codigoConfirm;
