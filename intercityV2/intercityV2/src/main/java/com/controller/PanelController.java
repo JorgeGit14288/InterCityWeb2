@@ -28,7 +28,7 @@ public class PanelController {
         String mensaje = null;
 
         if (sesion.getAttribute("usuario") == null) {
-            mav.setViewName("usuarios/login");
+            mav.setViewName("login/login");
 
         } else {
             sesionUser = sesion.getAttribute("usuario").toString();

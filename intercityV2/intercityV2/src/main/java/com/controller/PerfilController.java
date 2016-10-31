@@ -39,7 +39,7 @@ public class PerfilController {
             //GetAccount accountHelper = new GetAccount();
            // Account account = accountHelper.getAccountObject(sesUser);
            // mav.addObject("account", account);
-           mav.setViewName("usuarios/login");
+           mav.setViewName("login/login");
           
         } else {
             sesionUser = sesion.getAttribute("usuario").toString();

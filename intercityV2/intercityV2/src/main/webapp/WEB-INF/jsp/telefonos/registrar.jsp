@@ -20,25 +20,33 @@
             <form class="form-Registro" method="POST" action="validarRegistro.htm" >
                 <h2 class="form-signin-heading">INGRESE SUS DATOS </h2>                
                 <label for="codigoArea"  class="sr-only">Codigo de Area</label>
-                <input type="text" name="codigo" placeholder="Codigo de Area" id="codigo" list="codigoArea"/>
-                    <datalist id="codigoArea">
-                        <option value="201" />
-                        <option value="502" />
-                        <option value="503" />
-                        <option value="504" />
-                        <option value="505" />
-                    </datalist>   
+                <select name="codigo"  required  >
+                    <option value="1">+1 Estados Unidos </option> 
+                    <option value="1">+1 Canada</option> 
+                    <option value="1">+1 Puerto Rico</option> 
+                    <option value="1">+1 Republica Dominicana</option> 
+                    <option value="51">+51 Peru</option>
+                    <option value="52">+52 Mexico</option>
+                    <option value="53">+53 Cuba</option>
+                    <option value="56">+56 Chile</option>
+                    <option value="502">++502 Guatemala</option>
+                    <option value="503">++503 El Salvador</option>
+                    <option value="504">++504 Honduras</option>
+                    <option value="505">++505 Nicaragua</option>
+                    <option value="506">++506 Costa Rica</option>
+                     <option value="507">++507 Panama</option>
+                </select>
                 <label for="Telefono" class="sr-only">Telefono</label>
                 <input type="tel" name="telefono" id="telefono" class="form-control" placeholder="Numero de telefono" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" name="password"  id="inputPassword" class="form-control" placeholder="Password" required>
                 <label for="confirmPassword" class="sr-only">Confiramar Password</label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                
-                
-                 
+
+
+
                 <div class="checkbox">
-                    
+
                     <label>
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
@@ -48,26 +56,26 @@
 
         </div> <!-- /container -->
 
-<div id="Error">
-        <Br>
-        <center>
-            <h3>
-                ${mensaje}
-            </h3>
+        <div id="Error">
+            <Br>
+            <center>
+                <h3>
+                    ${mensaje}
+                </h3>
 
-        </center>
+            </center>
 
-    </div>
+        </div>
 
 
-    <div class="menu" >
-        <center>
-            <ul>
-                
-                <li><a href="index.htm">Regresar al Inicio</a></li>
+        <div class="menu" >
+            <center>
+                <ul>
 
-            </ul>
-        </center>
-    </div>
+                    <li><a href="index.htm">Regresar al Inicio</a></li>
+
+                </ul>
+            </center>
+        </div>
     </body>
 </html>

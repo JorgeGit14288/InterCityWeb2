@@ -1,5 +1,5 @@
 package com.entitys;
-// Generated 30-oct-2016 12:42:32 by Hibernate Tools 4.3.1
+// Generated 31-oct-2016 9:25:07 by Hibernate Tools 4.3.1
 
 
 
@@ -10,6 +10,7 @@ public class Usuarios  implements java.io.Serializable {
 
 
      private String idUsuario;
+     private String password;
      private String nombres;
      private String apellidos;
      private String pais;
@@ -20,11 +21,13 @@ public class Usuarios  implements java.io.Serializable {
     }
 
 	
-    public Usuarios(String idUsuario) {
+    public Usuarios(String idUsuario, String password) {
         this.idUsuario = idUsuario;
+        this.password = password;
     }
-    public Usuarios(String idUsuario, String nombres, String apellidos, String pais, String email, String status) {
+    public Usuarios(String idUsuario, String password, String nombres, String apellidos, String pais, String email, String status) {
        this.idUsuario = idUsuario;
+       this.password = password;
        this.nombres = nombres;
        this.apellidos = apellidos;
        this.pais = pais;
@@ -38,6 +41,13 @@ public class Usuarios  implements java.io.Serializable {
     
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
+    }
+    public String getPassword() {
+        return this.password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
     public String getNombres() {
         return this.nombres;

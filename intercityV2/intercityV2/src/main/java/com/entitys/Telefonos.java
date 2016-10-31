@@ -1,5 +1,5 @@
 package com.entitys;
-// Generated 30-oct-2016 12:42:32 by Hibernate Tools 4.3.1
+// Generated 31-oct-2016 9:25:07 by Hibernate Tools 4.3.1
 
 
 
@@ -11,7 +11,6 @@ public class Telefonos  implements java.io.Serializable {
 
      private String telefonoArea;
      private String telefono;
-     private String password;
      private String codigoArea;
      private String codigoConfirm;
      private String status;
@@ -21,17 +20,15 @@ public class Telefonos  implements java.io.Serializable {
     }
 
 	
-    public Telefonos(String telefonoArea, String telefono, String password, String codigoArea, String idUsuario) {
+    public Telefonos(String telefonoArea, String telefono, String codigoArea, String idUsuario) {
         this.telefonoArea = telefonoArea;
         this.telefono = telefono;
-        this.password = password;
         this.codigoArea = codigoArea;
         this.idUsuario = idUsuario;
     }
-    public Telefonos(String telefonoArea, String telefono, String password, String codigoArea, String codigoConfirm, String status, String idUsuario) {
+    public Telefonos(String telefonoArea, String telefono, String codigoArea, String codigoConfirm, String status, String idUsuario) {
        this.telefonoArea = telefonoArea;
        this.telefono = telefono;
-       this.password = password;
        this.codigoArea = codigoArea;
        this.codigoConfirm = codigoConfirm;
        this.status = status;
@@ -52,13 +49,7 @@ public class Telefonos  implements java.io.Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    public String getPassword() {
-        return this.password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
+   
     public String getCodigoArea() {
         return this.codigoArea;
     }

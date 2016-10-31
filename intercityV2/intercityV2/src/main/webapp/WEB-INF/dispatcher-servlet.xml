@@ -20,17 +20,23 @@
         <property name="mappings">
             <props>
                 <prop key="index.htm">indexController</prop>
-                <prop key="login.htm">usuariosController</prop>
-                <prop key="logout.htm">usuariosController</prop>
+                <prop key="login.htm">loginController</prop>
+                <prop key="logout.htm">loginController</prop>
                 <prop key="registrar.htm">registrarController</prop>
-                <prop key="validarLogin.htm">usuariosController</prop>
+                <prop key="validarLogin.htm">loginController</prop>
                 <prop key="validarRegistro.htm">registrarController</prop>
-                <prop key="editar.htm">usuariosController</prop>
-                <prop key="indexu.htm">usuariosController</prop>
+                <prop key="editar.htm">telefonosController</prop>
+                <prop key="indexu.htm">telefonosController</prop>
                 <prop key="confirmPhone.htm">registrarController</prop>
                 <prop key="validarPhone.htm">registrarController</prop>
                 <prop key="panel.htm">panelController</prop>
                 <prop key="perfil.htm">perfilController</prop>
+                <prop key="editarUsuarios.htm">usuariosController</prop>
+                <prop key="registrarUsuarios.htm">usuariosController</prop>
+                <prop key="usuarios.htm">usuariosController</prop>
+                <prop key="usuariosError.htm">usuariosController</prop>
+                <prop key="validarRegistrarUsuarios.htm">usuariosController</prop>
+                <prop key="validarEditarUsuarios.htm">usuariosController</prop>
             </props>
         </property>
     </bean>
@@ -47,6 +53,8 @@
     <bean name="registrarController" class="com.controller.RegistrarController"/>
     <bean name="panelController" class="com.controller.PanelController"/>
     <bean name="perfilController" class="com.controller.PerfilController"/>
+    <bean name="loginController" class="com.controller.LoginController"/>
+    <bean name="telefonosController" class="com.controller.TelefonosController"/>
     
     
     <bean name="indexController"

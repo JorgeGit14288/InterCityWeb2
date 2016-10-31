@@ -53,8 +53,7 @@ public class RegistrarController {
     @RequestMapping("registrar.htm")
     public ModelAndView Registrar() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("usuarios/registrar");
-        //  mav.addObject("usuario", new Users());
+        mav.setViewName("telefonos/registrar");
         return mav;
     }
 
@@ -65,6 +64,7 @@ public class RegistrarController {
         ModelAndView mav = new ModelAndView();
         Telefonos telefono = new Telefonos();
         TelefonosDao telDao = new TelefonosDao();
+        UsuariosDao userDao = new UsuariosDao();
         try {
             //cargamos los datos en un objeto usuario
             telefono.setCodigoArea(request.getParameter("codigo"));
@@ -73,48 +73,44 @@ public class RegistrarController {
             telefono.setStatus(request.getParameter("status"));
             Cifrar varCifrar = new Cifrar();
             String pass = varCifrar.Encriptar(request.getParameter("password"));
-            telefono.setPassword(pass);
+            //telefono.setPassword(pass);
 
             Usuarios usuario = new Usuarios();
-            if (contador ==0) 
-            {
-            contador = contador +1;
-            usuario.setIdUsuario("icu000"+contador);
-            }
-            else
-            {
-                contador = contador+2;
-                usuario.setIdUsuario("icu000"+contador);
-            }
-                
-            UsuariosDao userDao = new UsuariosDao();
+            int idi = userDao.countUsuarios();
+            String id = "icu0" + idi;
+            usuario.setIdUsuario(id);
+            usuario.setPassword(pass);
+                    
             if (userDao.createUsuarios(usuario)) {
                 telefono.setIdUsuario(usuario.getIdUsuario());
 
                 //verificamos si se crea el usuario
                 if (telDao.createTelefono(telefono) == true) {
+                    mensaje = null;
                     String sesUser = telefono.getTelefonoArea();
                     sesion.setAttribute("usuario", sesUser);;
                     mensaje = "Bienvenido";
                     this.createCodigo();
-                    mav.setViewName("usuarios/confirmPhone");
+                    mav.setViewName("telefonos/confirmPhone");
                     System.out.print("se ha creado un usuario");
                 } else {
-
+                    mensaje = null;
                     mensaje = "NO SE PUDO REGISTRAR EL TELEFONO";
-                    mav.setViewName("usuarios/registrar");
+                    mav.setViewName("telefonos/registrar");
                     System.out.print("NO SE ha creado un usuario");
                 }
             } else {
+                mensaje = null;
                 mensaje = "NO SE PUDO CREAR EL USUARIO";
-                mav.setViewName("usuarios/registrar");
+                mav.setViewName("telefonos/registrar");
             }
         } catch (Exception e) {
+            mensaje = null;
             e.printStackTrace();
-            mensaje = "se duplicaron llaves " + e.toString();
-            mav.setViewName("usuarios/registrar");
+            mensaje = "se duplicaron llaves ";
+            mav.setViewName("telefonos/registrar");
         }
-        mav.addObject("mensaje", request);
+        mav.addObject("mensaje", mensaje);
 
         return mav;
     }
@@ -128,10 +124,12 @@ public class RegistrarController {
 
     @RequestMapping("confirmPhone.htm")
     public ModelAndView getConfirm() {
+
         ModelAndView mav = new ModelAndView();
-        String mensaje = "Ingrese el codigo que recibio en su telefono " + this.getCodigo();
+        String mensaje = null;
+        mensaje = "Ingrese el codigo que recibio en su telefono " + this.getCodigo();
         mav.addObject("mensaje", mensaje);
-        mav.setViewName("usuarios/confirmPhone");
+        mav.setViewName("telefonos/confirmPhone");
         return mav;
     }
 
@@ -143,36 +141,30 @@ public class RegistrarController {
         String codigo2 = request.getParameter("codigo");
         try {
             if (sesion.getAttribute("usuario") == null) {
-
-                //GetAccount accountHelper = new GetAccount();
-                // Account account = accountHelper.getAccountObject(sesUser);
-                // mav.addObject("account", account);
-                mav.setViewName("usuarios/login");
+                mav.setViewName("login/login");
 
             } else {
                 if (this.getCodigo().compareTo(codigo2) == 0) {
 
-                    
-                   // Telefonos telefono = new Telefonos();
-                  //  TelefonosDao telDao = new TelefonosDao();
-                  //  telefono = telDao.getTelefono(sesion.getAttribute("usuario").toString());
-                  //  telefono.setCodigoConfirm(codigo2);
-                  //  if(telDao.updateTelefono(telefono))
-                  //  {
+                    Telefonos telefono = new Telefonos();
+                    TelefonosDao telDao = new TelefonosDao();
+                    String idtel = (sesion.getAttribute("usuario")).toString();
+                    System.out.print("el telefono a buscar para ingresar el codigo es " + idtel);
+                    telefono = telDao.getTelefono(idtel);
+                    telefono.setCodigoConfirm(this.getCodigo());
+                    if (telDao.updateTelefono(telefono)) {
                         mav.setViewName("panel/panel");
-                        this.setCodigo(null);
-                   // }
-                 //   else
-                 //   {
-                   //     mensaje = "El codigo es correcto, pero no se ha podido cargar a su cuenta";
-                     //   mav.addObject("mensaje", mensaje);
-                       // mav.setViewName("usuarios/confirmPhone");
-                   // } 
+                        //this.setCodigo(null);
+                    } else {
+                        mensaje = "El codigo es correcto, pero no se ha podido cargar a su cuenta";
+                        mav.addObject("mensaje", mensaje);
+                        mav.setViewName("usuarios/confirmPhone");
+                    }
                 } else {
 
                     mensaje = "El codigo ingreado no es correcto, por favor intente de nuevo";
                     mav.addObject("mensaje", mensaje);
-                    mav.setViewName("usuarios/confirmPhone");
+                    mav.setViewName("telefonos/confirmPhone");
                 }
 
             }

@@ -3,8 +3,11 @@
     Created on : 24-oct-2016, 18:07:48
     Author     : jorge
 --%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -91,11 +94,60 @@
                 <ul class="nav nav-sidebar">
                     <li><a href=""></a></li>
                     <li><a href=""></a></li>
-                   <li><a href="logout.htm">LogOut</a></li>
+                    <li><a href="logout.htm">LogOut</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Dashboard</h1>    
+                <div class="container">
+
+                    <form class="form-Registro" method="POST" action="validarRegistrarUsuarios.htm" >
+                        <h2 class="form-signin-heading">INGRESE SUS DATOS </h2>                
+                        <label for="idUsuario" >Id Uusario</label>
+                        <input type="text" disabled name="idUsuario" value ="${user.getIdUsuario()}" id="codigo" /> 
+                        <br>
+                        <label for="Telefono" >Telefonos:</label><br>
+
+                        <c:forEach items="${listTel}" var="listTel">
+                            <input type="text"  name="telefono" value ="${listTel.getTelefonoArea()}" id="telefonos" /> 
+                            <c:out value="${listTel.getTelefonoArea()}" />
+                        </c:forEach>
+                           <label for="nombres" >Nombres</label>
+                           <input type="text"  name="nombres"  id="nombre" required placeholder="first name" /> <br>
+                           <label for="apellidos" >Apellidos</label>
+                           <input type="text"  name="apellidos"  id="apellidos" required placeholder="last name" /><br>
+                           <label for="direccion" >Direccion</label>
+                           <input type="text"  name="direccion"  id="direccion" required placeholder="address" /><br>
+                           <label for="ciudad" >Ciudad</label>
+                           <input type="text"  name="ciudad"  id="city" required placeholder="city" /><br>
+                           
+                           <label for="codigo" >Codigo Postal</label>
+                           <input type="num"  name="codigoPostal"  id="nombre" required placeholder="postal code" /><br>
+                           <label for="email" >E-mail</label>
+                           <input type="email" name="email"  id="nombre" required placeholder="example@example.com" /><br>
+                           <label for="languaje" >languaje</label>
+                           <input type="text"  name="lenguaje"  id="languaje" required placeholder="languaje" /><br>
+                           <label for="notify Email" >Notificar a e-mail</label>
+                           <input type="checkbox"  name="notifyEmail"  value="Yes"/><br>
+                           <label for="flag" >Notificar Flag</label>
+                           <input type="checkbox"  name="notifyFlag"  value="Yes"/><br>
+                             <input type="reset">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    </form>
+
+                </div> <!-- /container -->
+
+                <div id="Error">
+                    <Br>
+                    <center>
+
+                        <h3>
+                            ${mensaje}
+                        </h3>
+
+                    </center>
+
+                </div>
             </div>
         </div>
     </div>
@@ -112,4 +164,4 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
-</html>
+</html>>

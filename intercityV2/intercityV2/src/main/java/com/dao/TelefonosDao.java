@@ -38,12 +38,32 @@ public class TelefonosDao implements ITelefonosDao {
         try {
             iniciaOperacion();
             listaTelefonoss = sesion.createQuery("from Telefonos").list();
+            System.out.println("se ha devuelto una lista del servidor");
         } finally {
             sesion.close();
+             System.out.println("Error al devolver lista");
         }
+        
 
         return listaTelefonoss;
     }
+    public List<Telefonos> getAllTelUser(String telefono) throws HibernateException {
+        List<Telefonos> listaTelefonoss = null;
+
+        try {
+            iniciaOperacion();
+            listaTelefonoss = sesion.createQuery("from Telefonos where telefono_area="+telefono+"").list();
+            System.out.println("se devolvio la lista de telefonos de un usuario");
+        } finally {
+            sesion.close();
+             System.out.println("Error al devolver lista de telefonos de el usuario");
+        }
+        
+
+        return listaTelefonoss;
+    }
+    
+    
 
     public Telefonos getTelefono(String telefono) throws HibernateException {
         Telefonos tel = null;
@@ -53,8 +73,9 @@ public class TelefonosDao implements ITelefonosDao {
             Query query = sesion.createQuery(queryString);
             query.setString("telefono", telefono);
             tel = (Telefonos) query.uniqueResult();
-            System.out.println("El usuario exite" + tel.getTelefonoArea());
+            System.out.println("obteniendo los telefonos de un usuario" + tel.getTelefonoArea());
         } catch (Exception e) {
+             System.out.println("No se ha encontrado el registro telefonico");
             e.printStackTrace();
 
         } finally {
@@ -84,8 +105,10 @@ public class TelefonosDao implements ITelefonosDao {
             sesion.delete(tel);
             tx.commit();
             resultado = true;
+             System.out.println("Se ha eliminado un registro telefonicon "+tel.getCodigoArea());
         } catch (HibernateException he) {
             manejaExcepcion(he);
+            System.out.println("NO Se ha eliminado un registro telefonicon "+tel.getTelefonoArea());
             throw he;
         } finally {
             sesion.close();
@@ -100,7 +123,9 @@ public class TelefonosDao implements ITelefonosDao {
             sesion.update(tel);
             tx.commit();
             resultado = true;
+            System.out.println("Se ha actualizado un telefono "+tel.getTelefonoArea());
         } catch (HibernateException he) {
+            System.out.println("NO Se ha actualizado un telefono "+tel.getTelefonoArea());
             manejaExcepcion(he);
             throw he;
         } finally {
@@ -117,8 +142,10 @@ public class TelefonosDao implements ITelefonosDao {
             sesion.save(tel);
             tx.commit();
             resultado = true;
+             System.out.println("Se ha CREADO un telefono "+tel.getTelefonoArea());
         } catch (HibernateException he) {
             manejaExcepcion(he);
+             System.out.println("NO Se ha CREADO un telefono "+tel.getTelefonoArea());
             throw he;
         } finally {
             sesion.close();

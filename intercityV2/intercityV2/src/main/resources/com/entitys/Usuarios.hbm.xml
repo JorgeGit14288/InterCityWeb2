@@ -1,15 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29-oct-2016 19:35:16 by Hibernate Tools 4.3.1 -->
+<!-- Generated 31-oct-2016 9:25:07 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.entitys.Usuarios" table="usuarios" catalog="intercity2" optimistic-lock="version">
         <id name="idUsuario" type="string">
             <column name="idUsuario" length="25" />
             <generator class="assigned" />
         </id>
-        <property name="nombre" type="string">
-            <column name="nombre" length="60" />
+        <property name="password" type="string">
+            <column name="password" length="125" not-null="true" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="nombres" length="60" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="50" />
         </property>
         <property name="pais" type="string">
             <column name="pais" length="30" />

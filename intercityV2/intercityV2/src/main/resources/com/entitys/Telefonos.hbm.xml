@@ -1,21 +1,19 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29-oct-2016 19:35:16 by Hibernate Tools 4.3.1 -->
+<!-- Generated 31-oct-2016 9:25:07 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.entitys.Telefonos" table="telefonos" catalog="intercity2" optimistic-lock="version">
-        <id name="telefono" type="string">
-            <column name="telefono" length="15" />
+        <id name="telefonoArea" type="string">
+            <column name="telefono_area" length="17" />
             <generator class="assigned" />
         </id>
-        <property name="password" type="string">
-            <column name="password" length="100" not-null="true" />
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" not-null="true" />
         </property>
+       
         <property name="codigoArea" type="string">
             <column name="codigo_area" length="4" not-null="true" />
-        </property>
-        <property name="telefonoArea" type="string">
-            <column name="telefono_area" length="12" not-null="true" />
         </property>
         <property name="codigoConfirm" type="string">
             <column name="codigo_confirm" length="10" />

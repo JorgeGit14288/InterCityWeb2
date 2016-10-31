@@ -22,7 +22,7 @@ public class testmain {
      Usuarios user = new Usuarios();
         UsuariosDao dao = new UsuariosDao();
         
-        user.setNombre("Carlos");
+        user.setNombres("Carlos");
         //user.setTelefono("4569321");
         user.setPais("Guatemala");
        // user.setPassword("amor");
