@@ -54,6 +54,7 @@ public class UsuariosController {
         String mensaje = null;
 
         if (sesion.getAttribute("usuario") == null) {
+
             mav.setViewName("login/login");
 
         } else {
@@ -105,7 +106,34 @@ public class UsuariosController {
         sesion = request.getSession();
         ModelAndView mav = new ModelAndView();
         String mensaje = null;
-        mav.setViewName("usuarios/editarUsuarios");
+        if (sesion.getAttribute("usuario") == null) {
+            mav.setViewName("login/login");
+
+        } else {
+            String idUsuario = request.getParameter("idUsuaro");
+            String TelArea = request.getParameter(sesion.getAttribute("usuario").toString());
+            String nombres = request.getParameter("nombres");
+            String apellidos = request.getParameter("apellidos");
+            String direccion = request.getParameter("direccion");
+            String ciudad = request.getParameter("ciudad");
+            String codigoPostal = request.getParameter("codigoPostal");
+            String email = request.getParameter("email");
+            String lenguaje = request.getParameter("lenguaje");
+            boolean notifyEmail=false;
+            boolean notifyFlag=false;
+
+            if (request.getParameter("notifyEmail")!=null) {
+                notifyEmail = true;
+            }
+            if (request.getParameter("notifyFlag")!=null) {
+                notifyFlag = true;
+            }
+
+            System.out.println("los checkbox tienen valor " + notifyEmail + notifyFlag);
+
+            mav.setViewName("panel/panel");
+        }
+
         return mav;
     }
 

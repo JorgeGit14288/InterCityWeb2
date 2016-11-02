@@ -6,6 +6,7 @@
 package com.util;
 
 import com.entitys.Account;
+import com.entitys.AccountLight;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,7 +20,7 @@ import org.json.JSONObject;
  *
  * @author jorge
  */
-public class GetAccount {
+public class httpAccount {
 
     public Account getAccountObject(String telefono) {
         System.out.println("OBTENER SOLO UN ARRAY DE CADENA JSON");
@@ -89,6 +90,22 @@ public class GetAccount {
        // System.out.println(account.getCreation());
         account.setLanguaje_id(objJson3.get("language_id").toString());
         return account;
+    }
+    public void setAccountObject(AccountLight account, String user) {
+        System.out.println("ENVIANDO UN ARRAY JSON");
+        String usuario = user.replace("-", "");
+        
+        
+        
+        System.out.println("ENVIANDO UN ARRAY JSON");
+        Gson gson = new Gson();
+        JSONObject objJson = new JSONObject();
+        String json = gson.toJson(account);
+        
+        JSONObject objJson2 = new JSONObject(json);
+        
+        System.out.println("DATOS JSON A ENVIAR "+objJson2.toString());
+        
     }
 
 }

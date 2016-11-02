@@ -8,7 +8,7 @@ package com.controller;
 import com.dao.UsuariosDao;
 import com.entitys.Account;
 import com.entitys.Telefonos;
-import com.util.GetAccount;
+import com.util.httpAccount;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
@@ -60,9 +60,10 @@ public class PerfilController {
             
         } else {
             String sesUser = sesion.getAttribute("usuario").toString();
-            String sesuser = sesUser.replace("-","");
-            GetAccount accountHelper = new GetAccount();
-             account = accountHelper.getAccountObject(sesUser);
+            String temp = sesUser.replace("-","");
+            System.out.println(temp);
+            httpAccount accountHelper = new httpAccount();
+             account = accountHelper.getAccountObject(temp);
              System.out.println("Regrese con datos para la vista "+account.getFirst_name()+account.getLanguaje_id());
             mav.addObject("account", account);
         }

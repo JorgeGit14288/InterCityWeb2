@@ -125,12 +125,12 @@
                            <input type="num"  name="codigoPostal"  id="nombre" required placeholder="postal code" /><br>
                            <label for="email" >E-mail</label>
                            <input type="email" name="email"  id="nombre" required placeholder="example@example.com" /><br>
-                           <label for="languaje" >languaje</label>
-                           <input type="text"  name="lenguaje"  id="languaje" required placeholder="languaje" /><br>
+                           <label for="lenguaje" >languaje</label>
+                           <input type="text"  name="lenguaje"  id="languaje" required placeholder="Languaje" /><br>
                            <label for="notify Email" >Notificar a e-mail</label>
-                           <input type="checkbox"  name="notifyEmail"  value="Yes"/><br>
+                           <input type="checkbox"  name="notifyEmail"  /><br>
                            <label for="flag" >Notificar Flag</label>
-                           <input type="checkbox"  name="notifyFlag"  value="Yes"/><br>
+                           <input type="checkbox"  name="notifyFlag"  /><br>
                              <input type="reset">
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     </form>
