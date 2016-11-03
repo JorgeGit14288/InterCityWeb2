@@ -1,5 +1,5 @@
 package com.entitys;
-// Generated 31-oct-2016 9:25:07 by Hibernate Tools 4.3.1
+// Generated 03-nov-2016 12:55:21 by Hibernate Tools 4.3.1
 
 
 
@@ -49,7 +49,6 @@ public class Telefonos  implements java.io.Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-   
     public String getCodigoArea() {
         return this.codigoArea;
     }

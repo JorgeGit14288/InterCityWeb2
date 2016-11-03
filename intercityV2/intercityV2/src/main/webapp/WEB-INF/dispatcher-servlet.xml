@@ -70,6 +70,7 @@
     <bean name="perfilController" class="com.controller.PerfilController"/>
     <bean name="loginController" class="com.controller.LoginController"/>
     <bean name="telefonosController" class="com.controller.TelefonosController"/>
+    <bean name="recuperarController" class="com.controller.RecuperarController"/>
     
     
     <bean name="indexController"
