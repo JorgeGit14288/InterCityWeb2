@@ -7,6 +7,7 @@ package com.controller;
 
 import com.dao.TelefonosDao;
 import com.dao.UsuariosDao;
+import com.entitys.AccountLight;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.entitys.Telefonos;
 import com.entitys.Usuarios;
 import com.util.Cifrar;
+import com.util.httpAccount;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -102,13 +106,12 @@ public class UsuariosController {
 
     @RequestMapping(value = "validarRegistrarUsuarios.htm", method = RequestMethod.POST)
     public ModelAndView validarRegistrarUsuarios(HttpServletRequest request
-    ) {
+    ) throws MalformedURLException, IOException {
         sesion = request.getSession();
         ModelAndView mav = new ModelAndView();
         String mensaje = null;
         if (sesion.getAttribute("usuario") == null) {
             mav.setViewName("login/login");
-
         } else {
             String idUsuario = request.getParameter("idUsuaro");
             String TelArea = request.getParameter(sesion.getAttribute("usuario").toString());
@@ -128,10 +131,43 @@ public class UsuariosController {
             if (request.getParameter("notifyFlag")!=null) {
                 notifyFlag = true;
             }
+            AccountLight account = new AccountLight();
+            Usuarios usuario = new Usuarios();
+            
+            account.setAddress(direccion);
+            account.setCity(ciudad);
+            account.setEmail(email);
+            account.setFirstName(nombres);
+            account.setLastName(apellidos);
+            account.setNotifyEmail(notifyEmail);
+            account.setNotifyEmail(notifyEmail);
+            account.setPostalCode(codigoPostal);
+            account.setLanguaje_id(1);
+            
+            usuario.setApellidos(apellidos);
+            usuario.setEmail(email);
+            usuario.setIdUsuario(idUsuario);
+            usuario.setNombres(nombres);
+            usuario.setPais(ciudad);
+            usuario.setStatus("Activo");
+            
+            UsuariosDao userDao = new UsuariosDao();
+            
+            if(userDao.updateUsuarios(usuario))
+            {
+                mav.setViewName("panel/perfil");
+            }
+            else
+            {
+                mav.setViewName("usuarios/registrarUsuarios");
+            }
+            httpAccount accountHelper = new httpAccount();
+            
+            accountHelper.setAccountObject(account, idUsuario);
 
-            System.out.println("los checkbox tienen valor " + notifyEmail + notifyFlag);
+            //System.out.println("los checkbox tienen valor " + notifyEmail + notifyFlag);
 
-            mav.setViewName("panel/panel");
+           // mav.setViewName("panel/panel");
         }
 
         return mav;

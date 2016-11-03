@@ -3,75 +3,105 @@
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
     <head>
-        <meta charset="UTF-8">
-        <link rel='stylesheet' href='webjars/bootstrap/3.3.7-1/css/bootstrap.min.css'>
-        <script type="text/javascript" src="webjars/jquery/3.1.0/jquery.min.js"></script>
-        <script type="text/javascript" src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
         <title>LOGIN</title>
 
+        <!-- Bootstrap Core CSS -->
+        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- MetisMenu CSS -->
+        <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
     </head>
 
     <body>
 
         <div class="container">
-            <div>
-                <form class="form-signin" method="POST" action="validarLogin.htm">
-                    <h2 class="form-signin-heading">INGRESE SUS CREDENCIALES</h2>
-                    <label for="codigoArea">Codigo de Area</label>
-                    <input type="text" name="codigo" id="codigo" list="codigoArea"/>
-                    <datalist id="codigoArea">
-                        <option value="201" />
-                        <option value="502" />
-                        <option value="503" />
-                        <option value="504" />
-                        <option value="505" />
-                    </datalist> 
-                    <label for="Telefono" class="sr-only">Telefono</label>
-                    <input type="tel" name="telefono" maxlength="9" id="telefono" class="form-control" placeholder="Numero de telefono" required autofocus  >
-                    <label for="inputPassword"  class="sr-only">Password</label>
-                    <input type="password" maxlength="25" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Recuerdame
-                        </label>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Please Sign In</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" method="POST" action="validarLogin.htm">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input type="text" name="codigo" id="codigo" list="codigoArea"/>
+                                        <datalist id="codigoArea">
+                                            <option value="201" />
+                                            <option value="502" />
+                                            <option value="503" />
+                                            <option value="504" />
+                                            <option value="505" />
+                                        </datalist>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="telefono" name="telefono" required type="text" autofocus >
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Password" name="password" type="password" value="" required>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        </label>
+                                    </div>
+                                    <!-- Change this to a button or input when using this as a form -->
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                                </fieldset>
+                            </form>
+                            <div id="Error">
+                                <Br>
+                                <center>
+                                    <h3>
+                                        ${mensaje}
+                                    </h3>
+
+                                </center>
+
+                            </div>
+                        </div>
                     </div>
+                </div>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+        </div>
 
-    </div> <!-- /container --
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <br>
-    <br>
+        <!-- jQuery -->
+        <script src="../vendor/jquery/jquery.min.js"></script>
 
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <div id="Error">
-        <Br>
-        <center>
-            <h3>
-                ${mensaje}
-            </h3>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
-        </center>
+        <!-- Custom Theme JavaScript -->
+        <script src="../dist/js/sb-admin-2.js"></script>
 
-    </div>
+    </body>
 
-
-    <div class="menu" >
-        <center>
-            <ul>
-                <li><a href="registrar.htm">Registrarse</a></li>
-                <li><a href="index.htm">Regresar al Inicio</a></li>
-
-            </ul>
-        </center>
-    </div>
-
-</body>
 </html>

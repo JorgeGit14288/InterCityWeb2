@@ -10,7 +10,6 @@ package com.entitys;
  * @author jorge
  */
 public class AccountLight {
-    private String tel;
     private String firstName;
     private String lastName;
     private String address;
@@ -21,13 +20,7 @@ public class AccountLight {
     private boolean notifyEmail;
     private boolean notityFlag;
 
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
+   
 
     public String getFirstName() {
         return firstName;
