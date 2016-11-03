@@ -31,7 +31,7 @@ public class httpAccount {
     public Account getAccountObject(String telefono) {
         System.out.println("OBTENER SOLO UN ARRAY DE CADENA JSON");
         //String myURL = "http://192.168.5.44/app_dev.php/cus/getaccount/50241109321.json";
-         String myURL = "http://192.168.5.44/app_dev.php/cus/getaccount/"+telefono+".json";
+        String myURL = "http://192.168.5.44/app_dev.php/cus/getaccount/" + telefono + ".json";
         System.out.println("Requested URL:" + myURL);
         StringBuilder sb = new StringBuilder();
         URLConnection urlConn = null;
@@ -87,83 +87,68 @@ public class httpAccount {
         //   System.out.println("el ULTIMO OBJETO SIMPLE ES  " + objJson3.toString());
         //   System.out.println("\n\n--------------------EMPEZAMOS A RECIBIR LOS PARAMETROS QUE HAY EN EL OBJETO JSON---------------------------\n\n");
         String firstName = objJson3.getString("first_name");
-         System.out.println(firstName);
-         System.out.println(objJson3.get("language_id"));
+        System.out.println(firstName);
+        System.out.println(objJson3.get("language_id"));
         //  System.out.println("\n\n--------------------TRATAMOS DE PASAR TODO EL ACCOUNT A OBJETO JAVA---------------------------\n\n");
         Gson gson = new Gson();
         Account account = gson.fromJson(objJson3.toString(), Account.class);
         //System.out.println(account.getFirst_name());
-       // System.out.println(account.getCreation());
+        // System.out.println(account.getCreation());
         account.setLanguaje_id(objJson3.get("language_id").toString());
         return account;
     }
-    public String  setAccountObject(AccountLight account2, String user) throws UnsupportedEncodingException, MalformedURLException, IOException {
-           ///////////////////////////////////////////////////////////////////////////////
-        String resultado = null;
-        String user2 = "502-41109321";
-        AccountLight account = new AccountLight();
-        account.setAddress("0-91");
-        account.setCity("Quetzaltenango");
-        account.setEmail("jorge@gmail.com");
-        account.setFirstName("Jorge");
-        account.setLastName("Fuentes");
-        account.setLanguaje_id(1);
-        account.setNotifyEmail(true);
-        account.setNotityFlag(true);
-        account.setPostalCode("88");
 
-        System.out.println("ENVIANDO UN ARRAY JSON");
-        String usuario = user.replace("-", "");
+    public String setAccountObject(AccountLight account, String user) throws UnsupportedEncodingException, MalformedURLException, IOException {
 
-        System.out.println("ENVIANDO UN ARRAY JSON");
-        Gson gson = new Gson();
-        JSONObject objJson = new JSONObject();
-        String json = gson.toJson(account);
+         String respuesta = null;
+        String myUrl = "http://192.168.5.44/app_dev.php/cus/setaccount/" +user + ".json";
+        URL url = new URL(myUrl);
+        try {
 
-        JSONObject objJson2 = new JSONObject(json);
+           
+            //abrimos la conexiÃ³n
+            URLConnection conn = url.openConnection();
+            //especificamos que vamos a escribir
+            conn.setDoOutput(true);
 
-        System.out.println("DATOS JSON A ENVIAR " + objJson2.toString());
-        
-        
-        /////////////////////////////////////////////////////////////////////////
-        
-        
-        String userAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:26.0) Gecko/20100101 Firefox/26.0";
-        String address = "http://192.168.5.44/app_dev.php/cus/editaccount/";
-        String forSending = objJson2.toString();
-        String charset = "UTF-8";
+            String data = URLEncoder.encode("firstName", "UTF-8") + "=" + URLEncoder.encode(account.getFirstName(), "UTF-8");
+            data += "&" + URLEncoder.encode("lastName", "UTF-8") + "=" + URLEncoder.encode(account.getLastName(), "UTF-8");
+            data += "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(account.getAddress(), "UTF-8");
+            data += "&" + URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(account.getCity(), "UTF-8");
+            data += "&" + URLEncoder.encode("postalCode", "UTF-8") + "=" + URLEncoder.encode(account.getPostalCode(), "UTF-8");
+            data += "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(account.getEmail(), "UTF-8");
+            data += "&" + URLEncoder.encode("languaje", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(account.getLanguaje_id()) , "UTF-8");
+            data += "&" + URLEncoder.encode("notifyEmail", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(account.isNotifyEmail()), "UTF-8");
+            data += "&" + URLEncoder.encode("notifyFlag", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(account.isNotityFlag()), "UTF-8");
+//escribimos
+            try ( //obtenemos el flujo de escritura
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream())) {
+                //escribimos
+                wr.write(data);
+                wr.flush();
 
-        String stringToSend = URLEncoder.encode(forSending, charset);
+//cerramos la conexiÃ³n
+            }
 
-        URL URL = new URL(address);
-        HttpURLConnection connection = (HttpURLConnection)URL.openConnection();
-        connection.addRequestProperty("User-Agent", userAgent);
+            //obtenemos el flujo de lectura
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String linea;
+            //procesamos al salida
+            while ((linea = rd.readLine()) != null) {
+                respuesta += linea;
+            }
 
-        //Para poder escribir datos a la URL
-        connection.setDoOutput(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            respuesta = null;
+        }
 
-        // Indicamos el tipo de request, POST en este caso
-        connection.setRequestMethod("POST");
+        System.out.println(respuesta);
+        // TODO code application logic here
+      
 
-        // Indicamos un timeout de 10 segundos
-        connection.setReadTimeout(10*1000);
+        return respuesta;
 
-        OutputStreamWriter out = new OutputStreamWriter(
-                connection.getOutputStream());
-        out.write("50241109321=" + stringToSend);
-        out.close();
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(
-                        connection.getInputStream()));
-        String response;
-        while((response = in.readLine()) != null)
-            System.out.println(response);
-        in.close();
-        
-        
-        return resultado;
-        
     }
 
 }
