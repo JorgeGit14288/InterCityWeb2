@@ -35,18 +35,14 @@ public class PerfilController {
         String mensaje = null;
 
         if (sesion.getAttribute("usuario") == null) {
-             
-            //GetAccount accountHelper = new GetAccount();
-           // Account account = accountHelper.getAccountObject(sesUser);
-           // mav.addObject("account", account);
-           mav.setViewName("login/login");
-          
+
+            mav.setViewName("login/login");
+
         } else {
             sesionUser = sesion.getAttribute("usuario").toString();
-             mav.setViewName("panel/perfil");
+            mav.setViewName("panel/perfil");
         }
-        //mav.addObject("mensaje", mensaje);
-        
+
         return mav;
     }
 
@@ -56,15 +52,15 @@ public class PerfilController {
         //Data referencing for web framework checkboxes
         Account account = new Account();
         ModelAndView mav = new ModelAndView();
-         if (sesion.getAttribute("usuario") == null) {
-            
+        if (sesion.getAttribute("usuario") == null) {
+
         } else {
             String sesUser = sesion.getAttribute("usuario").toString();
-            String temp = sesUser.replace("-","");
+            String temp = sesUser.replace("-", "");
             System.out.println(temp);
             httpAccount accountHelper = new httpAccount();
-             account = accountHelper.getAccountObject(temp);
-             System.out.println("Regrese con datos para la vista "+account.getFirst_name()+account.getLanguaje_id());
+            account = accountHelper.getAccountObject(temp);
+            System.out.println("Regrese con datos para la vista " + account.getFirst_name() + account.getLanguaje_id());
             mav.addObject("account", account);
         }
 

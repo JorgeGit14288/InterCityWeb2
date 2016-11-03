@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.entitys.Telefonos;
 import com.dao.UsuariosDao;
+import com.entitys.Account;
 import com.entitys.Usuarios;
 import com.util.Cifrar;
 import com.util.GeneradorCodigos;
+import com.util.httpAccount;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -80,14 +82,24 @@ public class RegistrarController {
             String id = "icu0" + idi;
             usuario.setIdUsuario(id);
             usuario.setPassword(pass);
-                    
+
             if (userDao.createUsuarios(usuario)) {
                 telefono.setIdUsuario(usuario.getIdUsuario());
+                String sesUser = telefono.getTelefonoArea();
+                String temp = sesUser.replace("-", "");
+                System.out.println(temp);
+                httpAccount accountHelper = new httpAccount();
+                Account account = accountHelper.getAccountObject(temp);
+                
+                usuario.setIdAccount(account.getId());
+                userDao.updateUsuarios(usuario);
+                System.out.println("el id de Account del usuario es  " + account.getId());
+                //mav.addObject("account", account);
 
                 //verificamos si se crea el usuario
                 if (telDao.createTelefono(telefono) == true) {
                     mensaje = null;
-                    String sesUser = telefono.getTelefonoArea();
+                    sesUser = telefono.getTelefonoArea();
                     sesion.setAttribute("usuario", sesUser);;
                     mensaje = "Bienvenido";
                     this.createCodigo();
