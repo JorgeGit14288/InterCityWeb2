@@ -7,6 +7,7 @@ package com.controller;
 
 import com.dao.TelefonosDao;
 import com.dao.UsuariosDao;
+import com.entitys.Account;
 import com.entitys.AccountLight;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 public class UsuariosController {
+    
+    
+    public UsuariosController()
+    {
+        
+    }
 
     HttpSession sesion;
     String sesionUser;
@@ -62,7 +69,8 @@ public class UsuariosController {
             mav.setViewName("login/login");
 
         } else {
-
+            String sesUser = sesion.getAttribute("usuario").toString();
+             
             mav.setViewName("usuarios/registrarUsuarios");
         }
         return mav;
@@ -113,7 +121,7 @@ public class UsuariosController {
         if (sesion.getAttribute("usuario") == null) {
             mav.setViewName("login/login");
         } else {
-            String idUsuario = request.getParameter("idUsuaro");
+            String idUsuario = request.getParameter("idUsuario");
             String TelArea = request.getParameter(sesion.getAttribute("usuario").toString());
             String nombres = request.getParameter("nombres");
             String apellidos = request.getParameter("apellidos");
@@ -133,6 +141,7 @@ public class UsuariosController {
             }
             AccountLight account = new AccountLight();
             Usuarios usuario = new Usuarios();
+            UsuariosDao userDao = new UsuariosDao();
             
             account.setAddress(direccion);
             account.setCity(ciudad);
@@ -144,34 +153,49 @@ public class UsuariosController {
             account.setPostalCode(codigoPostal);
             account.setLanguaje_id(1);
             
+            usuario = userDao.getUsuario(idUsuario);
+
             usuario.setApellidos(apellidos);
             usuario.setEmail(email);
-            usuario.setIdUsuario(idUsuario);
+            //usuario.setIdUsuario(idUsuario);
+            System.out.print("el id del usuario es "+idUsuario);
             usuario.setNombres(nombres);
             usuario.setPais(ciudad);
             usuario.setStatus("Activo");
             
-            UsuariosDao userDao = new UsuariosDao();
+
+            httpAccount accountHelper = new httpAccount();
             
             if(userDao.updateUsuarios(usuario))
             {
+                
+                usuario = userDao.getUsuario(idUsuario);
+                if (usuario.getIdAccount()==null)
+                {
+                    System.out.println("No se ha enontrado el accountId del usuario se buscara");
+                    usuario.setIdAccount(accountHelper.getIdAccount(TelArea));
+                    userDao.updateUsuarios(usuario);
+                    System.out.println("Se ha registrado el usuario con el servidor en linea ");
+                }
+                else
+                {
+                     System.out.println("Se encontro el accountId del usuario ");
+                    accountHelper.setAccountObject(account, usuario.getIdAccount());
+                      System.out.println("se ha actualizado el usuario al servidor ");
+                }
+                
                 mav.setViewName("panel/perfil");
             }
+            
             else
             {
                 mav.setViewName("usuarios/registrarUsuarios");
-            }
-            httpAccount accountHelper = new httpAccount();
-            
-            accountHelper.setAccountObject(account, idUsuario);
-
-            //System.out.println("los checkbox tienen valor " + notifyEmail + notifyFlag);
-
-           // mav.setViewName("panel/panel");
+            }         
         }
-
         return mav;
     }
+
+   
 
     //ATRIBUTOS PARA CONSULTAR
     @ModelAttribute("listUser")
@@ -213,6 +237,19 @@ public class UsuariosController {
         tel = telDao.getTelefono(uSesion);
 
         return tel;
+    }
+    // validar si el usuario aun no tiene el AccountId
+    @ModelAttribute("idAccount")
+    public String getidAccount(HttpServletRequest request
+    ) {
+        sesion = request.getSession();
+        String uSesion = sesion.getAttribute("usuario").toString();
+        //Data referencing for web framework checkboxes
+        ModelAndView mav = new ModelAndView();
+        httpAccount accountHelper = new httpAccount();
+        String resultado = accountHelper.getIdAccount(uSesion);
+
+        return resultado;
     }
 
 }

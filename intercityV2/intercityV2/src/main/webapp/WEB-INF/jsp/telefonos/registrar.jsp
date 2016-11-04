@@ -9,7 +9,7 @@
         <script type="text/javascript" src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 
 
-        <title>Signin Template for Bootstrap</title>
+        <title>REGISTRAR TELEFONO</title>
 
     </head>
 
@@ -29,12 +29,12 @@
                     <option value="52">+52 Mexico</option>
                     <option value="53">+53 Cuba</option>
                     <option value="56">+56 Chile</option>
-                    <option value="502">++502 Guatemala</option>
-                    <option value="503">++503 El Salvador</option>
-                    <option value="504">++504 Honduras</option>
-                    <option value="505">++505 Nicaragua</option>
-                    <option value="506">++506 Costa Rica</option>
-                     <option value="507">++507 Panama</option>
+                    <option value="502">+502 Guatemala</option>
+                    <option value="503">+503 El Salvador</option>
+                    <option value="504">+504 Honduras</option>
+                    <option value="505">+505 Nicaragua</option>
+                    <option value="506">+506 Costa Rica</option>
+                     <option value="507">+507 Panama</option>
                 </select>
                 <label for="Telefono" class="sr-only">Telefono</label>
                 <input type="tel" name="telefono" id="telefono" class="form-control" placeholder="Numero de telefono" required autofocus>

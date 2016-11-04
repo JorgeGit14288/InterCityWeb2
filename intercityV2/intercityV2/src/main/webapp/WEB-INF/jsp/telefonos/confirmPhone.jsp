@@ -32,7 +32,7 @@
     <center>
     <dif id="form">
         <form method="POST" action="validarPhone.htm">
-            <label>Ingrese el codigo enviado a su telefono </label>
+            <label>Ingrese el codigo enviado a su telefono <c:out value="${codigo}" /></label>
             <input type="num" name="codigo" placeholder="Codigo" required="" >
             <br>
             <input type="submit" name="enviar" value="enviar">

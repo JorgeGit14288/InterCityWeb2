@@ -86,17 +86,9 @@ public class RegistrarController {
             if (userDao.createUsuarios(usuario)) {
                 telefono.setIdUsuario(usuario.getIdUsuario());
                 String sesUser = telefono.getTelefonoArea();
-                String temp = sesUser.replace("-", "");
-                System.out.println(temp);
                 httpAccount accountHelper = new httpAccount();
-                Account account = accountHelper.getAccountObject(temp);
-                
-                usuario.setIdAccount(account.getId());
+                usuario.setIdAccount(accountHelper.getIdAccount(sesUser));
                 userDao.updateUsuarios(usuario);
-                System.out.println("el id de Account del usuario es  " + account.getId());
-                //mav.addObject("account", account);
-
-                //verificamos si se crea el usuario
                 if (telDao.createTelefono(telefono) == true) {
                     mensaje = null;
                     sesUser = telefono.getTelefonoArea();

@@ -13,12 +13,15 @@
     </head>
 
     <body>
-        <h1>SPRING MVC PROJECT 1</h1>
+        <center>
+        <h1>INTERCITY APLICATION</h1>
         
         <div>
+            <br><br>
             <a href="login.htm">Login de usuarios</a>
             <br><br>
-            <a href="indexu.htm">VER USUARIOS REGISTRADOS</a>
+            
         </div>
+        </center>
     </body>
 </html>

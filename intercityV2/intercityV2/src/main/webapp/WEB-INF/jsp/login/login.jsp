@@ -74,6 +74,14 @@
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                                 </fieldset>
                             </form>
+                            <div>
+                                <br>
+                                <br>
+                                <a href="recuperar.htm">Recuperar una cueta existente</a>
+                                <br>
+                                <br>
+                                <a href="registrar.htm">Registrarse como nuevo usuario</a>
+                            </div>
                             <div id="Error">
                                 <Br>
                                 <center>
@@ -89,6 +97,7 @@
                 </div>
             </div>
         </div>
+
 
         <!-- jQuery -->
         <script src="../vendor/jquery/jquery.min.js"></script>

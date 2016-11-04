@@ -63,53 +63,36 @@ public class RecuperarController {
         Telefonos telefono = new Telefonos();
         TelefonosDao telDao = new TelefonosDao();
         UsuariosDao userDao = new UsuariosDao();
+        Usuarios usuario = new Usuarios();
         try {
             //cargamos los datos en un objeto usuario
-            telefono.setCodigoArea(request.getParameter("codigo"));
-            telefono.setTelefono(request.getParameter("telefono"));
-            telefono.setTelefonoArea(telefono.getCodigoArea() + "-" + telefono.getTelefono());
-            telefono.setStatus(request.getParameter("status"));
-            Cifrar varCifrar = new Cifrar();
-            String pass = varCifrar.Encriptar(request.getParameter("password"));
-            //telefono.setPassword(pass);
-
-            Usuarios usuario = new Usuarios();
-            int idi = userDao.countUsuarios();
-            String id = "icu0" + idi;
-            usuario.setIdUsuario(id);
-            usuario.setPassword(pass);
-                    
-            if (userDao.createUsuarios(usuario)) {
-                telefono.setIdUsuario(usuario.getIdUsuario());
-
-                //verificamos si se crea el usuario
-                if (telDao.createTelefono(telefono) == true) {
-                    mensaje = null;
-                    String sesUser = telefono.getTelefonoArea();
-                    sesion.setAttribute("usuario", sesUser);;
-                    mensaje = "Bienvenido";
-                    this.createCodigo();
-                    mav.setViewName("telefonos/confirmPhone");
-                    System.out.print("se ha creado un usuario");
-                } else {
-                    mensaje = null;
-                    mensaje = "NO SE PUDO REGISTRAR EL TELEFONO";
-                    mav.setViewName("telefonos/registrar");
-                    System.out.print("NO SE ha creado un usuario");
-                }
-            } else {
+            String codigo =(request.getParameter("codigo"));
+            String tel=(request.getParameter("telefono"));
+            String telArea=(codigo+ "-" + tel);    
+            
+            telefono = telDao.getTelefono(telArea);
+            usuario = userDao.getUsuario(telefono.getIdUsuario());       
+            if (usuario!=null)
+            {
                 mensaje = null;
-                mensaje = "NO SE PUDO CREAR EL USUARIO";
-                mav.setViewName("telefonos/registrar");
+                String sesUser = telefono.getTelefonoArea();
+                sesion.setAttribute("usuario", sesUser);
+                mav.setViewName("recuperar/recuperarPhone");
             }
+            else
+            {
+                mensaje = "No se encontro ninguna cuenta asociada al telefono "+telArea;
+                mav.setViewName("recuperar/recuperar");
+            }
+
+              
         } catch (Exception e) {
             mensaje = null;
             e.printStackTrace();
-            mensaje = "se duplicaron llaves ";
-            mav.setViewName("telefonos/registrar");
+            mensaje = "NO SE PUDO CONTACTAR CON EL SERVIDOR";
+            mav.setViewName("recuperar/recuperar");
         }
         mav.addObject("mensaje", mensaje);
-
         return mav;
     }
 
@@ -120,9 +103,9 @@ public class RecuperarController {
 
         ModelAndView mav = new ModelAndView();
         String mensaje = null;
-        mensaje = "Ingrese el codigo que recibio en su telefono " + this.getCodigo();
+        mensaje = "Ingrese el codigo que recibio en su telefono ";
         mav.addObject("mensaje", mensaje);
-        mav.setViewName("telefonos/confirmPhone");
+        mav.setViewName("recuperar/recuperarPhone");
         return mav;
     }
 

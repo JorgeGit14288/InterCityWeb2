@@ -51,7 +51,6 @@ public class LoginController {
         UsuariosDao userDao = new UsuariosDao();
         String mensaje = null;
         try {
-
             // recogemos los parametros
             sesion = request.getSession();
             String telefonoArea = (request.getParameter("codigo") + "-" + request.getParameter("telefono"));
@@ -63,7 +62,7 @@ public class LoginController {
 
             user = userDao.getUsuario(tel2.getIdUsuario());
 
-            if (tel2.getTelefonoArea() == null) {
+            if (tel2 == null) {
                 mensaje = "El usuario no existe en la base de datos";
                 System.out.println("ha ocurrido un error");
                 mav.setViewName("login/login");

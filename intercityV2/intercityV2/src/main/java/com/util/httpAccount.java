@@ -28,7 +28,8 @@ import org.json.JSONObject;
  */
 public class httpAccount {
 
-    public Account getAccountObject(String telefono) {
+    public Account getAccountObject(String tel) {
+        String telefono = tel.replace("-", "");
         System.out.println("OBTENER SOLO UN ARRAY DE CADENA JSON");
         //String myURL = "http://192.168.5.44/app_dev.php/cus/getaccount/50241109321.json";
         String myURL = "http://192.168.5.44/app_dev.php/cus/getaccount/" + telefono + ".json";
@@ -150,7 +151,15 @@ public class httpAccount {
       
 
         return respuesta;
-
+    } 
+    
+    public String getIdAccount(String telefono)
+    {
+        Account account = this.getAccountObject(telefono);
+        System.out.println("Se ha devuelto el idAccount "+account.getId()); 
+        return account.getId();
+ 
+   
     }
 
 }

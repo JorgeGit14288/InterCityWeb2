@@ -104,7 +104,7 @@
                     <form class="form-Registro" method="POST" action="validarRegistrarUsuarios.htm" >
                         <h2 class="form-signin-heading">INGRESE SUS DATOS </h2>                
                         <label for="idUsuario" >Id Uusario</label>
-                        <input type="text" disabled name="idUsuario" value ="${user.getIdUsuario()}" id="codigo" /> 
+                        <input type="text" readonly name="idUsuario" value ="${user.getIdUsuario()}" id="idUsuario" /> 
                         <br>
                         <label for="Telefono" >Telefonos:</label><br>
 
