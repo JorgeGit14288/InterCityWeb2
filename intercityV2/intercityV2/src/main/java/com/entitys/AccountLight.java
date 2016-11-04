@@ -16,7 +16,7 @@ public class AccountLight {
     private String city;
     private String postalCode;
     private String email;
-    private int languaje_id;
+    private String languaje_id;
     private boolean notifyEmail;
     private boolean notityFlag;
 
@@ -70,11 +70,11 @@ public class AccountLight {
         this.email = email;
     }
 
-    public int getLanguaje_id() {
+    public String getLanguaje_id() {
         return languaje_id;
     }
 
-    public void setLanguaje_id(int languaje_id) {
+    public void setLanguaje_id(String languaje_id) {
         this.languaje_id = languaje_id;
     }
 

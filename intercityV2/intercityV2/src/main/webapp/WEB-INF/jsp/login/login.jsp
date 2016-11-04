@@ -16,16 +16,16 @@
         <title>LOGIN</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/theme1/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/theme1/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/theme1/dist/css/sb-admin-2.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="${pageContext.request.contextPath}/resources/theme1/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,17 +48,23 @@
                         <div class="panel-body">
                             <form role="form" method="POST" action="validarLogin.htm">
                                 <fieldset>
-                                    <div class="form-group">
-                                        <input type="text" name="codigo" id="codigo" list="codigoArea"/>
-                                        <datalist id="codigoArea">
-                                            <option value="201" />
-                                            <option value="502" />
-                                            <option value="503" />
-                                            <option value="504" />
-                                            <option value="505" />
-                                        </datalist>
-
-                                    </div>
+                                    <label for="codigoArea" >Codigo de Area</label>
+                                    <select name="codigo"  required  >
+                                        <option value="1">+1 Estados Unidos </option> 
+                                        <option value="1">+1 Canada</option> 
+                                        <option value="1">+1 Puerto Rico</option> 
+                                        <option value="1">+1 Republica Dominicana</option> 
+                                        <option value="51">+51 Peru</option>
+                                        <option value="52">+52 Mexico</option>
+                                        <option value="53">+53 Cuba</option>
+                                        <option value="56">+56 Chile</option>
+                                        <option value="502">+502 Guatemala</option>
+                                        <option value="503">+503 El Salvador</option>
+                                        <option value="504">+504 Honduras</option>
+                                        <option value="505">+505 Nicaragua</option>
+                                        <option value="506">+506 Costa Rica</option>
+                                        <option value="507">+507 Panama</option>
+                                    </select>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="telefono" name="telefono" required type="text" autofocus >
                                     </div>
@@ -100,16 +106,16 @@
 
 
         <!-- jQuery -->
-        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/theme1/vendor/jquery/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/theme1/vendor/bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/theme1/vendor/metisMenu/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="../dist/js/sb-admin-2.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/theme1/dist/js/sb-admin-2.js"></script>
 
     </body>
 

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.controller;
+
 import com.dao.TelefonosDao;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 public class RecuperarController {
-    
+
     HttpSession sesion;
     String codigo;
     int contador = 0;
@@ -66,26 +67,22 @@ public class RecuperarController {
         Usuarios usuario = new Usuarios();
         try {
             //cargamos los datos en un objeto usuario
-            String codigo =(request.getParameter("codigo"));
-            String tel=(request.getParameter("telefono"));
-            String telArea=(codigo+ "-" + tel);    
-            
+            String codigo = (request.getParameter("codigo"));
+            String tel = (request.getParameter("telefono"));
+            String telArea = (codigo + "-" + tel);
+
             telefono = telDao.getTelefono(telArea);
-            usuario = userDao.getUsuario(telefono.getIdUsuario());       
-            if (usuario!=null)
-            {
+            usuario = userDao.getUsuario(telefono.getIdUsuario());
+            if (usuario != null) {
                 mensaje = null;
                 String sesUser = telefono.getTelefonoArea();
                 sesion.setAttribute("usuario", sesUser);
                 mav.setViewName("recuperar/recuperarPhone");
-            }
-            else
-            {
-                mensaje = "No se encontro ninguna cuenta asociada al telefono "+telArea;
+            } else {
+                mensaje = "No se encontro ninguna cuenta asociada al telefono " + telArea;
                 mav.setViewName("recuperar/recuperar");
             }
 
-              
         } catch (Exception e) {
             mensaje = null;
             e.printStackTrace();
@@ -95,8 +92,6 @@ public class RecuperarController {
         mav.addObject("mensaje", mensaje);
         return mav;
     }
-
-   
 
     @RequestMapping("recuperarPhone.htm")
     public ModelAndView getConfirm() {
@@ -129,7 +124,7 @@ public class RecuperarController {
                     telefono = telDao.getTelefono(idtel);
                     telefono.setCodigoConfirm(this.getCodigo());
                     if (telDao.updateTelefono(telefono)) {
-                        mav.setViewName("panel/panel");
+                        mav.setViewName("recuperar/setPassword");
                         //this.setCodigo(null);
                     } else {
                         mensaje = "El codigo es correcto, pero no se ha podido cargar a su cuenta";
@@ -150,21 +145,54 @@ public class RecuperarController {
 
         return mav;
     }
-    
+
     @RequestMapping("recuperarPassword.htm")
     public ModelAndView RecuperarPassword() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("recuperar/recuperarPassword");
         return mav;
     }
-    @RequestMapping("validarNewPassword")
-    public ModelAndView validarNewPassword() {
+
+    @RequestMapping(value = "validarNewPassword.htm", method = RequestMethod.POST)
+    public ModelAndView validarNewPassword(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        String mensaje = null;
+        sesion = request.getSession();
+        try {
+            if (sesion.getAttribute("usuario") == null) {
+                mav.setViewName("login/login");
+
+            } else {
+
+                Telefonos telefono = new Telefonos();
+                TelefonosDao telDao = new TelefonosDao();
+                String idtel = (sesion.getAttribute("usuario")).toString();
+                Cifrar varCifrar = new Cifrar();
+                String newPassword = varCifrar.Encriptar(request.getParameter("password"));
+                telefono = telDao.getTelefono(idtel);
+                UsuariosDao userDao = new UsuariosDao();
+
+                Usuarios usuario = userDao.getUsuario(telefono.getIdUsuario());
+                usuario.setPassword(newPassword);
+
+                if (userDao.updateUsuarios(usuario)) {
+                    sesion.invalidate();
+                    mav.setViewName("logout");
+                    mensaje = "Ingrese sus nuevos datos para ingresar al sistema";
+                } else {
+                    mensaje = "se encontro un error en el servidor";
+                    mav.addObject("mensaje", mensaje);
+                    mav.setViewName("recuperar/setPassword");
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         mav.setViewName("login/login");
         return mav;
     }
-    
-    
 
     @ModelAttribute("codigo")
     public String obtenerCodigo() {
@@ -178,13 +206,12 @@ public class RecuperarController {
             // return this.createCodigo();
         }
     }
-     public String createCodigo() {
+
+    public String createCodigo() {
         GeneradorCodigos codigosHelper = new GeneradorCodigos();
         String varCod = codigosHelper.getCodigo();
         //System.out.print(varCod);
         return varCod;
     }
 
-    
-    
 }

@@ -62,7 +62,10 @@
           p:viewName="index" />
     
     <mvc:annotation-driven />
-    <mvc:resources mapping="/resources/**" location="/resources/theme1/" />
+    <mvc:annotation-driven />
+    <mvc:default-servlet-handler />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+   
           
 
 </beans>

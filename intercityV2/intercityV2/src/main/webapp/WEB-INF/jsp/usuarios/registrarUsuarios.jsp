@@ -112,26 +112,29 @@
                             <input type="text"  name="telefono" value ="${listTel.getTelefonoArea()}" id="telefonos" /> 
                             <c:out value="${listTel.getTelefonoArea()}" />
                         </c:forEach>
-                           <label for="nombres" >Nombres</label>
-                           <input type="text"  name="nombres"  id="nombre" required placeholder="first name" /> <br>
-                           <label for="apellidos" >Apellidos</label>
-                           <input type="text"  name="apellidos"  id="apellidos" required placeholder="last name" /><br>
-                           <label for="direccion" >Direccion</label>
-                           <input type="text"  name="direccion"  id="direccion" required placeholder="address" /><br>
-                           <label for="ciudad" >Ciudad</label>
-                           <input type="text"  name="ciudad"  id="city" required placeholder="city" /><br>
-                           
-                           <label for="codigo" >Codigo Postal</label>
-                           <input type="num"  name="codigoPostal"  id="nombre" required placeholder="postal code" /><br>
-                           <label for="email" >E-mail</label>
-                           <input type="email" name="email"  id="nombre" required placeholder="example@example.com" /><br>
-                           <label for="lenguaje" >languaje</label>
-                           <input type="text"  name="lenguaje"  id="languaje" required placeholder="Languaje" /><br>
-                           <label for="notify Email" >Notificar a e-mail</label>
-                           <input type="checkbox"  name="notifyEmail"  /><br>
-                           <label for="flag" >Notificar Flag</label>
-                           <input type="checkbox"  name="notifyFlag"  /><br>
-                             <input type="reset">
+                        <label for="nombres" >Nombres</label>
+                        <input type="text"  name="nombres"  id="nombre" required placeholder="first name" /> <br>
+                        <label for="apellidos" >Apellidos</label>
+                        <input type="text"  name="apellidos"  id="apellidos" required placeholder="last name" /><br>
+                        <label for="direccion" >Direccion</label>
+                        <input type="text"  name="direccion"  id="direccion" required placeholder="address" /><br>
+                        <label for="ciudad" >Ciudad</label>
+                        <input type="text"  name="ciudad"  id="city" required placeholder="city" /><br>
+
+                        <label for="codigo" >Codigo Postal</label>
+                        <input type="num"  name="codigoPostal"  id="nombre" required placeholder="postal code" /><br>
+                        <label for="email" >E-mail</label>
+                        <input type="email" name="email"  id="nombre" required placeholder="example@example.com" /><br>
+                        <label for="languaje"  >Lenguaje para su operador</label>
+                        <select name="languaje"  required  >
+                            <option value="Es">Español</option> 
+                            <option value="En">Ingles</option> 
+                        </select><br>
+                        <label for="notify Email" >Notificar a e-mail</label>
+                        <input type="checkbox"  name="notifyEmail"  /><br>
+                        <label for="flag" >Notificar Flag</label>
+                        <input type="checkbox"  name="notifyFlag"  /><br>
+                        <input type="reset">
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     </form>
 

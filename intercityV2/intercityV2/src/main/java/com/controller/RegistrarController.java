@@ -72,7 +72,7 @@ public class RegistrarController {
             telefono.setCodigoArea(request.getParameter("codigo"));
             telefono.setTelefono(request.getParameter("telefono"));
             telefono.setTelefonoArea(telefono.getCodigoArea() + "-" + telefono.getTelefono());
-            telefono.setStatus(request.getParameter("status"));
+            telefono.setStatus("Activo");
             Cifrar varCifrar = new Cifrar();
             String pass = varCifrar.Encriptar(request.getParameter("password"));
             //telefono.setPassword(pass);
@@ -82,13 +82,20 @@ public class RegistrarController {
             String id = "icu0" + idi;
             usuario.setIdUsuario(id);
             usuario.setPassword(pass);
+            usuario.setStatus("Activo");
+            usuario.setTipoUsuario("Estandar");
 
             if (userDao.createUsuarios(usuario)) {
                 telefono.setIdUsuario(usuario.getIdUsuario());
                 String sesUser = telefono.getTelefonoArea();
+
                 httpAccount accountHelper = new httpAccount();
-                usuario.setIdAccount(accountHelper.getIdAccount(sesUser));
-                userDao.updateUsuarios(usuario);
+                if (accountHelper.isConnect()) {
+                    usuario.setIdAccount(accountHelper.getIdAccount(sesUser));
+                    userDao.updateUsuarios(usuario);
+                } else {
+                    System.out.println("No se logro conectar con el servidor");
+                }
                 if (telDao.createTelefono(telefono) == true) {
                     mensaje = null;
                     sesUser = telefono.getTelefonoArea();
@@ -111,7 +118,7 @@ public class RegistrarController {
         } catch (Exception e) {
             mensaje = null;
             e.printStackTrace();
-            mensaje = "se duplicaron llaves ";
+            mensaje = "Ocurrio un error al conectar al servidor ";
             mav.setViewName("telefonos/registrar");
         }
         mav.addObject("mensaje", mensaje);

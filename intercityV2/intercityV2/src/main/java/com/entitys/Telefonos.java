@@ -1,5 +1,5 @@
 package com.entitys;
-// Generated 03-nov-2016 12:55:21 by Hibernate Tools 4.3.1
+// Generated 04-nov-2016 10:38:27 by Hibernate Tools 4.3.1
 
 
 

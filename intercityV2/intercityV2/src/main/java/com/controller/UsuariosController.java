@@ -151,7 +151,7 @@ public class UsuariosController {
             account.setNotifyEmail(notifyEmail);
             account.setNotifyEmail(notifyEmail);
             account.setPostalCode(codigoPostal);
-            account.setLanguaje_id(1);
+            account.setLanguaje_id(lenguaje);
             
             usuario = userDao.getUsuario(idUsuario);
 
