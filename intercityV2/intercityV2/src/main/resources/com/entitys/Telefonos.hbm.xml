@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-nov-2016 10:38:27 by Hibernate Tools 4.3.1 -->
+<!-- Generated 6/11/2016 07:47:02 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.entitys.Telefonos" table="telefonos" catalog="intercity2" optimistic-lock="version">
+    <class name="com.entitys.Telefonos" table="Telefonos" catalog="intercity2" optimistic-lock="version">
         <id name="telefonoArea" type="string">
             <column name="telefono_area" length="17" />
             <generator class="assigned" />
         </id>
+        <many-to-one name="usuarios" class="com.entitys.Usuarios" fetch="select">
+            <column name="idUsuario" length="25" not-null="true" />
+        </many-to-one>
         <property name="telefono" type="string">
             <column name="telefono" length="15" not-null="true" />
         </property>
@@ -19,9 +22,6 @@
         </property>
         <property name="status" type="string">
             <column name="status" length="25" />
-        </property>
-        <property name="idUsuario" type="string">
-            <column name="idUsuario" length="25" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

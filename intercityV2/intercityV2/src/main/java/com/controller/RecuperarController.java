@@ -72,7 +72,7 @@ public class RecuperarController {
             String telArea = (codigo + "-" + tel);
 
             telefono = telDao.getTelefono(telArea);
-            usuario = userDao.getUsuario(telefono.getIdUsuario());
+            usuario = userDao.getUsuario(telefono.getUsuarios().getIdUsuario());
             if (usuario != null) {
                 mensaje = null;
                 String sesUser = telefono.getTelefonoArea();
@@ -172,7 +172,7 @@ public class RecuperarController {
                 telefono = telDao.getTelefono(idtel);
                 UsuariosDao userDao = new UsuariosDao();
 
-                Usuarios usuario = userDao.getUsuario(telefono.getIdUsuario());
+                Usuarios usuario = userDao.getUsuario(telefono.getUsuarios().getIdUsuario());
                 usuario.setPassword(newPassword);
 
                 if (userDao.updateUsuarios(usuario)) {

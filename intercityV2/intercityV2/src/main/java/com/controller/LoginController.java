@@ -60,7 +60,7 @@ public class LoginController {
 
             tel2 = dao.getTelefono(telefonoArea);
 
-            user = userDao.getUsuario(tel2.getIdUsuario());
+            user = userDao.getUsuario(tel2.getUsuarios().getIdUsuario());
 
             if (tel2 == null) {
                 mensaje = "El usuario no existe en la base de datos";

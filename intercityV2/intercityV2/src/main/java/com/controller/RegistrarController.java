@@ -86,7 +86,7 @@ public class RegistrarController {
             usuario.setTipoUsuario("Estandar");
 
             if (userDao.createUsuarios(usuario)) {
-                telefono.setIdUsuario(usuario.getIdUsuario());
+                telefono.setUsuarios(usuario);
                 String sesUser = telefono.getTelefonoArea();
 
                 httpAccount accountHelper = new httpAccount();

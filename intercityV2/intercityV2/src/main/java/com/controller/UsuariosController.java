@@ -220,7 +220,7 @@ public class UsuariosController {
         Telefonos tel = new Telefonos();
         TelefonosDao telDao = new TelefonosDao();
         tel = telDao.getTelefono(usr);
-        user = userDao.getUsuario(tel.getIdUsuario());
+        user = userDao.getUsuario(tel.getUsuarios().getIdUsuario());
 
         return user;
     }

@@ -1,5 +1,5 @@
 package com.entitys;
-// Generated 04-nov-2016 10:38:27 by Hibernate Tools 4.3.1
+// Generated 6/11/2016 07:47:02 PM by Hibernate Tools 4.3.1
 
 
 
@@ -10,29 +10,29 @@ public class Telefonos  implements java.io.Serializable {
 
 
      private String telefonoArea;
+     private Usuarios usuarios;
      private String telefono;
      private String codigoArea;
      private String codigoConfirm;
      private String status;
-     private String idUsuario;
 
     public Telefonos() {
     }
 
 	
-    public Telefonos(String telefonoArea, String telefono, String codigoArea, String idUsuario) {
+    public Telefonos(String telefonoArea, Usuarios usuarios, String telefono, String codigoArea) {
         this.telefonoArea = telefonoArea;
+        this.usuarios = usuarios;
         this.telefono = telefono;
         this.codigoArea = codigoArea;
-        this.idUsuario = idUsuario;
     }
-    public Telefonos(String telefonoArea, String telefono, String codigoArea, String codigoConfirm, String status, String idUsuario) {
+    public Telefonos(String telefonoArea, Usuarios usuarios, String telefono, String codigoArea, String codigoConfirm, String status) {
        this.telefonoArea = telefonoArea;
+       this.usuarios = usuarios;
        this.telefono = telefono;
        this.codigoArea = codigoArea;
        this.codigoConfirm = codigoConfirm;
        this.status = status;
-       this.idUsuario = idUsuario;
     }
    
     public String getTelefonoArea() {
@@ -41,6 +41,13 @@ public class Telefonos  implements java.io.Serializable {
     
     public void setTelefonoArea(String telefonoArea) {
         this.telefonoArea = telefonoArea;
+    }
+    public Usuarios getUsuarios() {
+        return this.usuarios;
+    }
+    
+    public void setUsuarios(Usuarios usuarios) {
+        this.usuarios = usuarios;
     }
     public String getTelefono() {
         return this.telefono;
@@ -69,13 +76,6 @@ public class Telefonos  implements java.io.Serializable {
     
     public void setStatus(String status) {
         this.status = status;
-    }
-    public String getIdUsuario() {
-        return this.idUsuario;
-    }
-    
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
 
